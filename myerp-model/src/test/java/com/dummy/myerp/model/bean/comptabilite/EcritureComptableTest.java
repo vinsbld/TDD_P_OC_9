@@ -58,10 +58,10 @@ public class EcritureComptableTest {
 
         }
 
-        /*@Test
+        @Test
         public void getTotalCredit_test(){
         BigDecimal totalCredit = vEcriture.getTotalCredit();
         assertThat(totalCredit.intValueExact()).isEqualTo(341);
-        }*/
+        }
 
 }
