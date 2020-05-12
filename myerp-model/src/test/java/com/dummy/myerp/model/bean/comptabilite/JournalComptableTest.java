@@ -23,4 +23,9 @@ public class JournalComptableTest {
     public void getByCode_whenJournalComptableExist(){
         assertThat(JournalComptable.getByCode(journalComptables,"ACH").getLibelle()).isEqualTo("Achat");
     }
+
+    @Test
+    public void getByCode_whenJournalComptableNotExist(){
+        assertThat(JournalComptable.getByCode(journalComptables, "AC")).isEqualTo(null);
+    }
 }
