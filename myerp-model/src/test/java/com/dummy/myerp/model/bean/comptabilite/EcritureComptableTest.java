@@ -23,6 +23,7 @@ public class EcritureComptableTest {
     }
 
     private EcritureComptable vEcriture;
+
     @Before
     public void initEcritureComptable(){
         vEcriture = new EcritureComptable();
