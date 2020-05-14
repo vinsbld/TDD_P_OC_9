@@ -15,17 +15,17 @@ public class JournalComptableTest {
     @Before
     public void initJournalComptable(){
         journalComptables = new ArrayList<JournalComptable>();
-        journalComptables.add(new JournalComptable("ACH","Achat"));
+        journalComptables.add(new JournalComptable("AC","Achat"));
 
     }
 
     @Test
     public void getByCode_whenJournalComptableExist(){
-        assertThat(JournalComptable.getByCode(journalComptables,"ACH").getLibelle()).isEqualTo("Achat");
+        assertThat(JournalComptable.getByCode(journalComptables,"AC").getLibelle()).isEqualTo("Achat");
     }
 
     @Test
     public void getByCode_whenJournalComptableNotExist(){
-        assertThat(JournalComptable.getByCode(journalComptables, "AC")).isEqualTo(null);
+        assertThat(JournalComptable.getByCode(journalComptables, "AS")).isEqualTo(null);
     }
 }

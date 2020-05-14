@@ -1,7 +1,6 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
 
-import com.dummy.myerp.model.validation.constraint.MontantComptable;
 import org.junit.Before;
 import org.junit.Test;
 
