@@ -11,6 +11,8 @@ public class SequenceEcritureComptable {
     private Integer annee;
     /** La dernière valeur utilisée */
     private Integer derniereValeur;
+    /** Le code du journal **/
+    private JournalComptable journalComptable;
 
     // ==================== Constructeurs ====================
     /**
@@ -19,17 +21,11 @@ public class SequenceEcritureComptable {
     public SequenceEcritureComptable() {
     }
 
-    /**
-     * Constructeur
-     *
-     * @param pAnnee -
-     * @param pDerniereValeur -
-     */
-    public SequenceEcritureComptable(Integer pAnnee, Integer pDerniereValeur) {
-        annee = pAnnee;
-        derniereValeur = pDerniereValeur;
+    public SequenceEcritureComptable(Integer annee, Integer derniereValeur, JournalComptable journalComptable) {
+        this.annee = annee;
+        this.derniereValeur = derniereValeur;
+        this.journalComptable = journalComptable;
     }
-
 
     // ==================== Getters/Setters ====================
     public Integer getAnnee() {
@@ -45,6 +41,13 @@ public class SequenceEcritureComptable {
         derniereValeur = pDerniereValeur;
     }
 
+    public JournalComptable getJournalComptable() {
+        return journalComptable;
+    }
+
+    public void setJournalComptable(JournalComptable journalComptable) {
+        this.journalComptable = journalComptable;
+    }
 
     // ==================== Méthodes ====================
     @Override

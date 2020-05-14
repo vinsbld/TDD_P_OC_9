@@ -1,20 +1,20 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import com.dummy.myerp.model.bean.comptabilite.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.TransactionStatus;
 import com.dummy.myerp.business.contrat.manager.ComptabiliteManager;
 import com.dummy.myerp.business.impl.AbstractBusinessManager;
-import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
-import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
-import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
-import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import com.dummy.myerp.technical.exception.NotFoundException;
 
@@ -26,6 +26,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
 
     // ==================== Attributs ====================
 
+    private EcritureComptable ecritureComptable = new EcritureComptable();
 
     // ==================== Constructeurs ====================
     /**
@@ -55,26 +56,71 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         return getDaoProxy().getComptabiliteDao().getListEcritureComptable();
     }
 
+    @Override
+    public SequenceEcritureComptable getSequenceEcritureComptable(String pJournal, Integer pAnnee) {
+        return getDaoProxy().getComptabiliteDao().getSequenceEcritureComptable(pJournal, pAnnee);
+    }
+
+    @Override
+    public void updateSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable){
+        getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(sequenceEcritureComptable);
+    }
+
+    @Override
+    public void insertSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable){
+        getDaoProxy().getComptabiliteDao().insertSequenceEcritureComptable(sequenceEcritureComptable);
+    }
+
+    /**
+     *
+     * @param sequenceEcritureComptable
+     * @return
+     */
+    public String setReference(SequenceEcritureComptable sequenceEcritureComptable){
+        String reference = sequenceEcritureComptable.getJournalComptable().getCode() + "-";
+        reference += sequenceEcritureComptable.getAnnee()  + "/";
+        reference += String.format("%05d", sequenceEcritureComptable.getDerniereValeur() );
+        return  reference;
+    }
+
     /**
      * {@inheritDoc}
      */
-    // TODO à tester
     @Override
     public synchronized void addReference(EcritureComptable pEcritureComptable) {
-        // TODO à implémenter
         // Bien se réferer à la JavaDoc de cette méthode !
         /* Le principe :
                 1.  Remonter depuis la persitance la dernière valeur de la séquence du journal pour l'année de l'écriture
                     (table sequence_ecriture_comptable)
                 2.  * S'il n'y a aucun enregistrement pour le journal pour l'année concernée :
-                        1. Utiliser le numéro 1.
-                    * Sinon :
-                        1. Utiliser la dernière valeur + 1
+                1. Utiliser le numéro 1.
+                * Sinon :
+                1. Utiliser la dernière valeur + 1
                 3.  Mettre à jour la référence de l'écriture avec la référence calculée (RG_Compta_5)
                 4.  Enregistrer (insert/update) la valeur de la séquence en persitance
-                    (table sequence_ecriture_comptable)
+                (table sequence_ecriture_comptable)
          */
+        Date date = pEcritureComptable.getDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        Integer annee = calendar.get(Calendar.YEAR);
+
+        SequenceEcritureComptable vSequenceEcritureComptable = getSequenceEcritureComptable(pEcritureComptable.getJournal().getCode(),annee);
+
+        if (vSequenceEcritureComptable != null){
+            vSequenceEcritureComptable.setDerniereValeur(vSequenceEcritureComptable.getDerniereValeur()+1);
+            updateSequenceEcritureComptable(vSequenceEcritureComptable);
+        }
+        else
+            {
+            vSequenceEcritureComptable = new SequenceEcritureComptable(annee,1, ecritureComptable.getJournal());
+            insertSequenceEcritureComptable(vSequenceEcritureComptable);
+        }
+        ecritureComptable.setReference(setReference(vSequenceEcritureComptable));
+
     }
+
+
 
     /**
      * {@inheritDoc}
