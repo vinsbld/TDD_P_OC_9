@@ -10,6 +10,7 @@ import com.dummy.myerp.business.impl.TransactionManager;
 import com.dummy.myerp.consumer.dao.contrat.ComptabiliteDao;
 import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
 import com.dummy.myerp.model.bean.comptabilite.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.dummy.myerp.technical.exception.FunctionalException;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +30,6 @@ public class ComptabiliteManagerImplTest {
     private LigneEcritureComptable ligneEcritureComptableCredit;
     private SequenceEcritureComptable vSequenceEcritureComptable;
     private List<SequenceEcritureComptable> sequenceEcritureComptableList;
-    private List<JournalComptable> journalComptableList= new ArrayList<>();
 
     @Mock
     private DaoProxy mockDaoProxy;
@@ -59,6 +60,15 @@ public class ComptabiliteManagerImplTest {
         sequenceEcritureComptableList = new ArrayList<>();
     }
 
+    @Test
+    public void setReference(){
+        SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(2020,15,vEcritureComptable.getJournal());
+        SequenceEcritureComptable sequenceEcritureComptable1 = new SequenceEcritureComptable(2019,12,vEcritureComptable.getJournal());
+
+        assertThat(manager.setReference(sequenceEcritureComptable)).isEqualTo("AC-2020/00015");
+        assertThat(manager.setReference(sequenceEcritureComptable)).isNotEqualTo("AD-2020/00015");
+        assertThat(manager.setReference(sequenceEcritureComptable1)).isNotEqualTo("AC-2020/00015");
+    }
 
 
     @Test
