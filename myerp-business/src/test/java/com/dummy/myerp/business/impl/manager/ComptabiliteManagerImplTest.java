@@ -28,8 +28,6 @@ public class ComptabiliteManagerImplTest {
     private EcritureComptable vEcritureComptable;
     private LigneEcritureComptable ligneEcritureComptableDebit;
     private LigneEcritureComptable ligneEcritureComptableCredit;
-    private SequenceEcritureComptable vSequenceEcritureComptable;
-    private List<SequenceEcritureComptable> sequenceEcritureComptableList;
 
     @Mock
     private DaoProxy mockDaoProxy;
@@ -55,9 +53,6 @@ public class ComptabiliteManagerImplTest {
         ligneEcritureComptableCredit = new LigneEcritureComptable(new CompteComptable(1),null, new BigDecimal(123),null);
         ligneEcritureComptableDebit = new LigneEcritureComptable(new CompteComptable(2), null, null, new BigDecimal(123));
 
-        vSequenceEcritureComptable = new SequenceEcritureComptable(2020, 14, vEcritureComptable.getJournal());
-
-        sequenceEcritureComptableList = new ArrayList<>();
     }
 
     @Test
