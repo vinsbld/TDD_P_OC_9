@@ -1,16 +1,12 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import com.dummy.myerp.business.impl.AbstractBusinessManager;
 import com.dummy.myerp.business.impl.TransactionManager;
 import com.dummy.myerp.consumer.dao.contrat.ComptabiliteDao;
 import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
 import com.dummy.myerp.model.bean.comptabilite.*;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.dummy.myerp.technical.exception.FunctionalException;
@@ -19,14 +15,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ComptabiliteManagerImplTest {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
+
     private EcritureComptable vEcritureComptable;
+
     private LigneEcritureComptable ligneEcritureComptableDebit;
+
     private LigneEcritureComptable ligneEcritureComptableCredit;
 
     @Mock
@@ -40,8 +38,6 @@ public class ComptabiliteManagerImplTest {
 
     @Before
     public void initComptabliteMangerImpl(){
-
-        AbstractBusinessManager.configure(null, this.mockDaoProxy, this.mockTransactionManager);
 
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setId(1);
@@ -68,8 +64,8 @@ public class ComptabiliteManagerImplTest {
 
     @Test
     public void checkEcritureComptableUnit() throws Exception {
-        vEcritureComptable.getListLigneEcriture().add(ligneEcritureComptableCredit);
         vEcritureComptable.getListLigneEcriture().add(ligneEcritureComptableDebit);
+        vEcritureComptable.getListLigneEcriture().add(ligneEcritureComptableCredit);
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
