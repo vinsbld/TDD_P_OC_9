@@ -30,8 +30,8 @@ public class EcritureComptableTest {
 
         vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
         vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "301"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "301"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(1, "40", "7"));
 
     }
 
@@ -46,8 +46,8 @@ public class EcritureComptableTest {
 
         vEcriture.getListLigneEcriture().add(this.createLigne(1, "10", null));
         vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "30"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "1", "2"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "30"));
+        vEcriture.getListLigneEcriture().add(this.createLigne(1, "1", "2"));
 
         assertThat(vEcriture.isEquilibree()).isEqualTo(false);
         }

@@ -79,7 +79,8 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     public String setReference(SequenceEcritureComptable sequenceEcritureComptable){
         String reference = sequenceEcritureComptable.getJournalComptable().getCode() + "-";
         reference += sequenceEcritureComptable.getAnnee()  + "/";
-        reference += String.format("%05d", sequenceEcritureComptable.getDerniereValeur() );
+        reference += String.format("%05d" +
+                "", sequenceEcritureComptable.getDerniereValeur() );
         return  reference;
     }
 
