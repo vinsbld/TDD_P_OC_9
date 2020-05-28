@@ -71,18 +71,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         getDaoProxy().getComptabiliteDao().insertSequenceEcritureComptable(sequenceEcritureComptable);
     }
 
-    /**
-     *
-     * @param sequenceEcritureComptable
-     * @return
-     */
-    public String setReference(SequenceEcritureComptable sequenceEcritureComptable){
-        String reference = sequenceEcritureComptable.getJournalComptable().getCode() + "-";
-        reference += sequenceEcritureComptable.getAnnee()  + "/";
-        reference += String.format("%05d" +
-                "", sequenceEcritureComptable.getDerniereValeur() );
-        return  reference;
-    }
+
 
     /**
      * {@inheritDoc}
@@ -117,8 +106,19 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
             vSequenceEcritureComptable = new SequenceEcritureComptable(annee,1, ecritureComptable.getJournal());
             insertSequenceEcritureComptable(vSequenceEcritureComptable);
         }
-        ecritureComptable.setReference(setReference(vSequenceEcritureComptable));
+        ecritureComptable.setReference(reference(vSequenceEcritureComptable));
 
+    }
+    /**
+     *
+     * @param sequenceEcritureComptable
+     * @return
+     */
+    public String reference(SequenceEcritureComptable sequenceEcritureComptable){
+        String reference = sequenceEcritureComptable.getJournalComptable().getCode() + "-"
+                + sequenceEcritureComptable.getAnnee() + "/"
+                + String.format("%05d", sequenceEcritureComptable.getDerniereValeur() );
+        return  reference;
     }
 
 
@@ -153,6 +153,12 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                                               "L'écriture comptable ne respecte pas les contraintes de validation",
                                               vViolations));
         }
+
+        // ===== RG_Compta_2 : Pour qu'une écriture comptable soit valide, elle doit être équilibrée
+        if (!pEcritureComptable.isEquilibree()) {
+            throw new FunctionalException("L'écriture comptable n'est pas équilibrée.");
+        }
+
         // ===== RG_Compta_3 : une écriture comptable doit avoir au moins 2 lignes d'écriture (1 au débit, 1 au crédit)
         int vNbrCredit = 0;
         int vNbrDebit = 0;
@@ -175,10 +181,8 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                     "L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
         }
 
-        // ===== RG_Compta_2 : Pour qu'une écriture comptable soit valide, elle doit être équilibrée
-        if (!pEcritureComptable.isEquilibree()) {
-            throw new FunctionalException("L'écriture comptable n'est pas équilibrée.");
-        }
+
+
 
         // TODO ===== RG_Compta_5 : Format et contenu de la référence
         // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...

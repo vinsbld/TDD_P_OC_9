@@ -52,13 +52,13 @@ public class ComptabiliteManagerImplTest {
     }
 
     @Test
-    public void setReference(){
+    public void reference(){
         SequenceEcritureComptable sequenceEcritureComptable = new SequenceEcritureComptable(2020,15,vEcritureComptable.getJournal());
         SequenceEcritureComptable sequenceEcritureComptable1 = new SequenceEcritureComptable(2019,12,vEcritureComptable.getJournal());
 
-        assertThat(manager.setReference(sequenceEcritureComptable)).isEqualTo("AC-2020/00015");
-        assertThat(manager.setReference(sequenceEcritureComptable)).isNotEqualTo("AD-2020/00015");
-        assertThat(manager.setReference(sequenceEcritureComptable1)).isNotEqualTo("AC-2020/00015");
+        assertThat(manager.reference(sequenceEcritureComptable)).isEqualTo("AC-2020/00015");
+        assertThat(manager.reference(sequenceEcritureComptable)).isNotEqualTo("AD-2020/00015");
+        assertThat(manager.reference(sequenceEcritureComptable1)).isNotEqualTo("AC-2020/00015");
     }
 
 
@@ -103,9 +103,19 @@ public class ComptabiliteManagerImplTest {
                                                                                  null, new BigDecimal(123),
                                                                                  null));
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
-                                                                                 null, new BigDecimal(123),
-                                                                                 null));
+                                                                                 null, null,
+                                                                                            new BigDecimal(123)));
         manager.checkEcritureComptableUnit(vEcritureComptable);
+
+        vEcritureComptable.getListLigneEcriture().clear();
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, null,
+                null));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, null,
+               null));
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
     }
 
 }
