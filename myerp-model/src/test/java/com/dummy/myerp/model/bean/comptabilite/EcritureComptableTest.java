@@ -55,7 +55,7 @@ public class EcritureComptableTest {
 
         @Test
         public void getTotalDebit_test(){
-        BigDecimal totalDebit = vEcriture.getTotalDebit();
+
             Assert.assertEquals(new BigDecimal("341.00"),vEcriture.getTotalDebit());
             Assert.assertNotEquals(new BigDecimal("341.0"),vEcriture.getTotalDebit());
             Assert.assertNotEquals(new BigDecimal("341"),vEcriture.getTotalDebit());
@@ -64,8 +64,10 @@ public class EcritureComptableTest {
 
         @Test
         public void getTotalCredit_test(){
-        BigDecimal totalCredit = vEcriture.getTotalCredit();
-        assertThat(totalCredit.doubleValue()).isEqualTo(341.00);
+
+        Assert.assertEquals(new BigDecimal("341.00"),vEcriture.getTotalCredit());
+        Assert.assertNotEquals(new BigDecimal("341"),vEcriture.getTotalCredit());
+        Assert.assertNotEquals(new BigDecimal("341.0"),vEcriture.getTotalCredit());
         }
 
 }

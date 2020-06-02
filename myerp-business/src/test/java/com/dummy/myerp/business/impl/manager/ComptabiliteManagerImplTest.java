@@ -59,6 +59,7 @@ public class ComptabiliteManagerImplTest {
         assertThat(manager.reference(sequenceEcritureComptable)).isEqualTo("AC-2020/00015");
         assertThat(manager.reference(sequenceEcritureComptable)).isNotEqualTo("AD-2020/00015");
         assertThat(manager.reference(sequenceEcritureComptable1)).isNotEqualTo("AC-2020/00015");
+        assertThat(manager.reference(sequenceEcritureComptable1)).isEqualTo("AC-2019/00012");
     }
 
 
