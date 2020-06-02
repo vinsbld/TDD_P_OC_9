@@ -1,6 +1,7 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.dummy.myerp.model.bean.comptabilite.*;
@@ -102,6 +103,18 @@ public class ComptabiliteManagerImplTest {
                 null, null,
                null));
         manager.checkEcritureComptableUnit(vEcritureComptable);
+
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void check_insertEcritureComptable() throws Exception{
+
+
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void check_updateEcritureComptable() throws Exception{
+
 
     }
 
