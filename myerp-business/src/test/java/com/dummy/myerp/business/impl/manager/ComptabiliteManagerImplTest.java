@@ -3,20 +3,14 @@ package com.dummy.myerp.business.impl.manager;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.dummy.myerp.business.impl.TransactionManager;
-import com.dummy.myerp.consumer.dao.contrat.ComptabiliteDao;
-import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
 import com.dummy.myerp.model.bean.comptabilite.*;
 import org.junit.Before;
 import org.junit.Test;
 import com.dummy.myerp.technical.exception.FunctionalException;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(MockitoExtension.class)
 public class ComptabiliteManagerImplTest {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
@@ -27,14 +21,6 @@ public class ComptabiliteManagerImplTest {
 
     private LigneEcritureComptable ligneEcritureComptableCredit;
 
-    @Mock
-    private DaoProxy mockDaoProxy;
-
-    @Mock
-    private ComptabiliteDao mockComptabiliteDao;
-
-    @Mock
-    private TransactionManager mockTransactionManager;
 
     @Before
     public void initComptabliteMangerImpl(){
