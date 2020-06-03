@@ -188,8 +188,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         calendar.setTime(date);
         if (!String.valueOf( calendar.get(Calendar.YEAR ) ).equals(pEcritureComptable.getReference().substring(3,7) )){
             throw new FunctionalException("l'année de l'écriture comptable n'est pas conforme.");
-        }else if (!Pattern.matches("[A-Z]{2}-[0-9]{4}/[0-9]{5}", pEcritureComptable.getReference() ) ){
-            throw new FunctionalException("le format de la référence de l'écriture comptable n'est pas conforme.");
         }else if(!pEcritureComptable.getJournal().getCode().equals( pEcritureComptable.getReference().substring(0,2) )){
             throw new FunctionalException("le code de la référence de l'écriture comptable n'est pas conforme.");
         }

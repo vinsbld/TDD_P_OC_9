@@ -21,13 +21,16 @@ public class ComptabiliteManagerImplTest {
 
     private LigneEcritureComptable ligneEcritureComptableCredit;
 
+    private JournalComptable journalComptable;
+
 
     @Before
     public void initComptabliteMangerImpl(){
 
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setId(1);
-        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        journalComptable = new JournalComptable("AC", "Achat");
+        vEcritureComptable.setJournal(journalComptable);
         vEcritureComptable.setDate(new Date());
         vEcritureComptable.setReference("AC-2020/00001");
         vEcritureComptable.setLibelle("Libelle");
@@ -101,6 +104,42 @@ public class ComptabiliteManagerImplTest {
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
                 null, null,
                null));
+        manager.checkEcritureComptable(vEcritureComptable);
+
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void checkEcritureComptableUnitRG5() throws FunctionalException{
+        vEcritureComptable.setJournal( journalComptable );
+        vEcritureComptable.setReference("AC-2020/00001");
+        vEcritureComptable.setDate( new Date() );
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                "Facture 1", new BigDecimal(123),
+                null));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                "Facture 2", null,
+                new BigDecimal(123)));
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
+        vEcritureComptable.setReference("AC-2019/00001");
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void checkEcritureComptableUnitRG5_2() throws FunctionalException{
+        vEcritureComptable.setJournal( journalComptable );
+        vEcritureComptable.setReference("AC-2020/00001");
+        vEcritureComptable.setDate( new Date() );
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(4),
+                "Facture 5", new BigDecimal(123),
+                null));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(5),
+                "Facture 6", null,
+                new BigDecimal(123)));
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
+        vEcritureComptable.setReference("AD-2020/00001");
         manager.checkEcritureComptableUnit(vEcritureComptable);
 
     }
