@@ -1,7 +1,6 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 
 import com.dummy.myerp.model.bean.comptabilite.*;
@@ -90,7 +89,7 @@ public class ComptabiliteManagerImplTest {
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
                                                                                  null, new BigDecimal(123),
                                                                                  null));
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
                                                                                  null, null,
                                                                                             new BigDecimal(123)));
         manager.checkEcritureComptableUnit(vEcritureComptable);
@@ -106,16 +105,8 @@ public class ComptabiliteManagerImplTest {
 
     }
 
-    @Test(expected = FunctionalException.class)
-    public void check_insertEcritureComptable() throws Exception{
 
 
-    }
 
-    @Test(expected = FunctionalException.class)
-    public void check_updateEcritureComptable() throws Exception{
-
-
-    }
 
 }

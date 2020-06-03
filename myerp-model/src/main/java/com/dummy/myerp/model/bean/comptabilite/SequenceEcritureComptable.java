@@ -45,7 +45,7 @@ public class SequenceEcritureComptable {
         return journalComptable;
     }
 
-    public void setJournalComptable(String journalComptable) {
+    public void setJournalComptable(JournalComptable journalComptable) {
         this.journalComptable = journalComptable;
     }
 

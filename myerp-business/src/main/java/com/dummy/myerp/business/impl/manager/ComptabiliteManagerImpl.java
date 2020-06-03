@@ -1,11 +1,11 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
@@ -142,7 +142,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      * @param pEcritureComptable -
      * @throws FunctionalException Si l'Ecriture comptable ne respecte pas les règles de gestion
      */
-    // TODO tests à compléter
     protected void checkEcritureComptableUnit(EcritureComptable pEcritureComptable) throws FunctionalException {
 
         // ===== Vérification des contraintes unitaires sur les attributs de l'écriture
@@ -182,8 +181,18 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                     "L'écriture comptable doit avoir au moins deux lignes : une ligne au débit et une ligne au crédit.");
         }
 
-        // TODO ===== RG_Compta_5 : Format et contenu de la référence
+        //RG-5
         // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...
+        Date date = pEcritureComptable.getDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        if (!String.valueOf( calendar.get(Calendar.YEAR ) ).equals(pEcritureComptable.getReference().substring(3,7) )){
+            throw new FunctionalException("l'année de l'écriture comptable n'est pas conforme.");
+        }else if (!Pattern.matches("[A-Z]{2}-[0-9]{4}/[0-9]{5}", pEcritureComptable.getReference() ) ){
+            throw new FunctionalException("le format de la référence de l'écriture comptable n'est pas conforme.");
+        }else if(!pEcritureComptable.getJournal().getCode().equals( pEcritureComptable.getReference().substring(0,2) )){
+            throw new FunctionalException("le code de la référence de l'écriture comptable n'est pas conforme.");
+        }
     }
 
 
