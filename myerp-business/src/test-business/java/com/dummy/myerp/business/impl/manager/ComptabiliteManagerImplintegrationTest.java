@@ -43,11 +43,5 @@ class ComptabiliteManagerImplintegrationTest {
     }
 
 
-    @Test
-    public void mcheck_insertEcriture(){
-
-        manager.insertEcritureComptable(vEcritureComptable);
-
-    }
 
 }

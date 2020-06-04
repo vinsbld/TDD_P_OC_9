@@ -108,6 +108,7 @@ public class ComptabiliteManagerImplTest {
 
     }
 
+
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG5() throws Exception{
         vEcritureComptable.setJournal( journalComptable );
@@ -161,6 +162,7 @@ public class ComptabiliteManagerImplTest {
 
 
     }
+
 
 
 

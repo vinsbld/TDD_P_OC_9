@@ -54,20 +54,28 @@ public class EcritureComptableTest {
         }
 
         @Test
-        public void getTotalDebit_test(){
+        public void getTotalDebit_test_Is_Equals_To_The_Sum_Of_TotalDebit(){
+        vEcriture.getListLigneEcriture().clear();
+        vEcriture.getListLigneEcriture().add(createLigne(1,"100.00",null));
+        vEcriture.getListLigneEcriture().add(createLigne(1,"50","30"));
+        vEcriture.getListLigneEcriture().add(createLigne(1,"25.5","29.00"));
+        vEcriture.getListLigneEcriture().add(createLigne(1,"-40","89.8"));
 
-            Assert.assertEquals(new BigDecimal("341.00"),vEcriture.getTotalDebit());
-            Assert.assertNotEquals(new BigDecimal("341.0"),vEcriture.getTotalDebit());
-            Assert.assertNotEquals(new BigDecimal("341"),vEcriture.getTotalDebit());
+        Assert.assertEquals(vEcriture.getTotalDebit(), BigDecimal.valueOf(100+50+25.5+(-40)).setScale(2, BigDecimal.ROUND_HALF_UP));
 
         }
 
         @Test
-        public void getTotalCredit_test(){
+        public void getTotalCredit_test_Is_Equals_To_The_Sum_Of_TotalCredit(){
+            vEcriture.getListLigneEcriture().clear();
+            vEcriture.getListLigneEcriture().add(createLigne(1,"100.00",null));
+            vEcriture.getListLigneEcriture().add(createLigne(1,"50","30"));
+            vEcriture.getListLigneEcriture().add(createLigne(1,"25","-29.00"));
+            vEcriture.getListLigneEcriture().add(createLigne(1,"40","89.8"));
 
-        Assert.assertEquals(new BigDecimal("341.00"),vEcriture.getTotalCredit());
-        Assert.assertNotEquals(new BigDecimal("341"),vEcriture.getTotalCredit());
-        Assert.assertNotEquals(new BigDecimal("341.0"),vEcriture.getTotalCredit());
+            Assert.assertEquals(vEcriture.getTotalCredit(), BigDecimal.valueOf(30+(-29.00)+89.8).setScale(2, BigDecimal.ROUND_HALF_UP));
         }
+
+
 
 }
