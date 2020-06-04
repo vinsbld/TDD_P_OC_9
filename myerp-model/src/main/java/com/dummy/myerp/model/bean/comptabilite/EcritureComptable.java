@@ -88,7 +88,8 @@ public class EcritureComptable {
                 vRetour = vRetour.add(vLigneEcritureComptable.getDebit());
             }
         }
-        return vRetour.setScale(2,RoundingMode.HALF_UP);
+        return vRetour;
+        //.setScale(2,RoundingMode.HALF_UP)
     }
 
     /**
@@ -103,7 +104,8 @@ public class EcritureComptable {
                 vRetour = vRetour.add(vLigneEcritureComptable.getCredit());
             }
         }
-        return vRetour.setScale(2, RoundingMode.HALF_UP);
+        return vRetour;
+        //.setScale(2, RoundingMode.HALF_UP)
     }
 
     /**

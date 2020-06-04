@@ -1,6 +1,8 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -191,6 +193,11 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         }else if(!pEcritureComptable.getJournal().getCode().equals( pEcritureComptable.getReference().substring(0,2) )){
             throw new FunctionalException("le code de la référence de l'écriture comptable n'est pas conforme.");
         }
+
+        //RG-7
+        //Les montants des lignes d'écritures peuvent comporter 2 chiffres maximum après la virgule.
+        //voir @Digits dans Montant comptable
+
     }
 
 
@@ -201,7 +208,8 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      * @param pEcritureComptable -
      * @throws FunctionalException Si l'Ecriture comptable ne respecte pas les règles de gestion
      */
-    protected void checkEcritureComptableContext(EcritureComptable pEcritureComptable) throws FunctionalException {
+    protected void
+    checkEcritureComptableContext(EcritureComptable pEcritureComptable) throws FunctionalException {
         // ===== RG_Compta_6 : La référence d'une écriture comptable doit être unique
         if (StringUtils.isNoneEmpty(pEcritureComptable.getReference())) {
             try {
