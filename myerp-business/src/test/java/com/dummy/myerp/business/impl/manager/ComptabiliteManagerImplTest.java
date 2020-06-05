@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.dummy.myerp.model.bean.comptabilite.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.dummy.myerp.technical.exception.FunctionalException;
@@ -108,6 +109,41 @@ public class ComptabiliteManagerImplTest {
 
     }
 
+    @Test
+    public void checkEcritureComptableUnitRG4(){
+        vEcritureComptable.setJournal( journalComptable );
+        vEcritureComptable.setReference("AC-2020/00001");
+        vEcritureComptable.setDate( new Date() );
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(5),
+                "Facture 6", null,
+                new BigDecimal("123.56")));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(4),
+                "Facture 5", new BigDecimal("-123.56").setScale(2, BigDecimal.ROUND_HALF_UP),
+                null));
+
+
+        Assert.assertEquals(vEcritureComptable.getTotalDebit(), BigDecimal.valueOf(-123.56));
+        Assert.assertNotEquals(vEcritureComptable.getTotalDebit(), BigDecimal.valueOf(123.56));
+
+    }
+
+    @Test
+    public void checkEcritureComptableUnitRG4_2(){
+        vEcritureComptable.setJournal( journalComptable );
+        vEcritureComptable.setReference("AC-2020/00001");
+        vEcritureComptable.setDate( new Date() );
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(5),
+                "Facture 6", null,
+                new BigDecimal("-123.56")));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(4),
+                "Facture 5", new BigDecimal("123.56").setScale(2, BigDecimal.ROUND_HALF_UP),
+                null));
+
+
+        Assert.assertEquals(vEcritureComptable.getTotalCredit(), BigDecimal.valueOf(-123.56));
+        Assert.assertNotEquals(vEcritureComptable.getTotalCredit(), BigDecimal.valueOf(123.56));
+
+    }
 
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG5() throws Exception{
