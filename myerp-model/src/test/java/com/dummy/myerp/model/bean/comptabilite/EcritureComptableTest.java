@@ -12,56 +12,56 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class EcritureComptableTest {
 
-    private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
-        BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
-        BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
-        String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
-                                     .subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
-        LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
-                                                                    vLibelle,
-                                                                    vDebit, vCredit);
-        return vRetour;
-    }
+        private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
+            BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
+            BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
+            String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
+                                         .subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
+            LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
+                                                                        vLibelle,
+                                                                        vDebit, vCredit);
+            return vRetour;
+        }
 
-    private EcritureComptable vEcriture;
+        private EcritureComptable vEcriture;
 
-    @Before
-    public void initEcritureComptable(){
-        vEcriture = new EcritureComptable();
+        @Before
+        public void initEcritureComptable(){
+            vEcriture = new EcritureComptable();
 
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "301"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "40", "7"));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "301"));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, "40", "7"));
 
-    }
+        }
 
-    @Test
-    public void isEquilibree() {
+        @Test
+        public void isEquilibree() {
 
-        assertThat(vEcriture.isEquilibree()).isEqualTo(true);
-    }
+            assertThat(vEcriture.isEquilibree()).isEqualTo(true);
+        }
 
-    @Test
-    public void isNotEquilibree() {
+        @Test
+        public void isNotEquilibree() {
 
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "10", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "30"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "1", "2"));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, "10", null));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1"));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "30"));
+            vEcriture.getListLigneEcriture().add(this.createLigne(1, "1", "2"));
 
-        assertThat(vEcriture.isEquilibree()).isEqualTo(false);
+            assertThat(vEcriture.isEquilibree()).isEqualTo(false);
         }
 
         @Test
         public void getTotalDebit_test_Is_Equals_To_The_Sum_Of_TotalDebit(){
-        vEcriture.getListLigneEcriture().clear();
-        vEcriture.getListLigneEcriture().add(createLigne(1,"100.00",null));
-        vEcriture.getListLigneEcriture().add(createLigne(1,"50","30"));
-        vEcriture.getListLigneEcriture().add(createLigne(1,"25.5","29.00"));
-        vEcriture.getListLigneEcriture().add(createLigne(1,"-40","89.8"));
+            vEcriture.getListLigneEcriture().clear();
+            vEcriture.getListLigneEcriture().add(createLigne(1,"100.00",null));
+            vEcriture.getListLigneEcriture().add(createLigne(1,"50","30"));
+            vEcriture.getListLigneEcriture().add(createLigne(1,"25.5","29.00"));
+            vEcriture.getListLigneEcriture().add(createLigne(1,"-40","89.8"));
 
-        Assert.assertEquals(vEcriture.getTotalDebit(), BigDecimal.valueOf(100+50+25.5+(-40)).setScale(2, BigDecimal.ROUND_HALF_UP));
+            Assert.assertEquals(vEcriture.getTotalDebit(), BigDecimal.valueOf(100+50+25.5+(-40)).setScale(2, BigDecimal.ROUND_HALF_UP));
 
         }
 
