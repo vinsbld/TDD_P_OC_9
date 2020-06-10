@@ -104,12 +104,12 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         }
         else
             {
-            vSequenceEcritureComptable = new SequenceEcritureComptable(annee,1, ecritureComptable.getJournal());
+            vSequenceEcritureComptable = new SequenceEcritureComptable(annee,1, pEcritureComptable.getJournal());
             insertSequenceEcritureComptable(vSequenceEcritureComptable);
         }
 
         /* 3.  Mettre à jour la référence de l'écriture avec la référence calculée (RG_Compta_5)*/
-        ecritureComptable.setReference(reference(vSequenceEcritureComptable));
+        pEcritureComptable.setReference(reference(vSequenceEcritureComptable));
 
     }
     /**
@@ -218,11 +218,11 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                 EcritureComptable vECRef = getDaoProxy().getComptabiliteDao().getEcritureComptableByRef(
                     pEcritureComptable.getReference());
 
-                // Si l'écriture à vérifier est une nouvelle écriture (id == null),
-                // ou si elle ne correspond pas à l'écriture trouvée (id != idECRef),
+
+                // si elle ne correspond pas à l'écriture trouvée (id != idECRef),
                 // c'est qu'il y a déjà une autre écriture avec la même référence
-                if (pEcritureComptable.getId() == null
-                    || !pEcritureComptable.getId().equals(vECRef.getId())) {
+                if (!vECRef.getId().equals(pEcritureComptable.getId()))
+               {
                     throw new FunctionalException("Une autre écriture comptable existe déjà avec la même référence.");
                 }
             } catch (NotFoundException vEx) {
