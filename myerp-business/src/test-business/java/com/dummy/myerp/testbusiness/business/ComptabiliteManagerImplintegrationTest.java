@@ -94,7 +94,7 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
     public void test5_checkEcritureComptable_RG_6() throws FunctionalException{
        manager = new ComptabiliteManagerImpl();
        vEcritureComptable = new EcritureComptable();
-       vEcritureComptable = manager.getListEcritureComptable().get(1);
+       vEcritureComptable = manager.getListEcritureComptable().get(0);
        vEcritureComptable.setJournal(new JournalComptable("BQ","2016"));
        vEcritureComptable.setReference("BQ-2016/00003");
        manager.checkEcritureComptable(vEcritureComptable);
