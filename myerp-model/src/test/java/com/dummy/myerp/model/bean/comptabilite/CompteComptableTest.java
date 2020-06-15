@@ -22,6 +22,7 @@ public class CompteComptableTest {
     }
 
     @Test
+
     public void getByNumero_whenCompteComptableExist(){
         assertThat(CompteComptable.getByNumero(compteComptableList, 1234).getLibelle()).isEqualTo("Compte courant 1");
     }
