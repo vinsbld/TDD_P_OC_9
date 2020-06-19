@@ -1,11 +1,8 @@
 package com.dummy.myerp.testbusiness.business;
 
 import com.dummy.myerp.business.impl.manager.ComptabiliteManagerImpl;
-import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
-import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
+import com.dummy.myerp.model.bean.comptabilite.*;
 
-import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
-import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -103,10 +100,12 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
     public void test6_AddReference_WhenRefExist(){
         manager = new ComptabiliteManagerImpl();
         EcritureComptable pEcritureComptable = manager.getListEcritureComptable().get(0);
+        SequenceEcritureComptable pSequenceEcritureComptable = manager.getSequenceEcritureComptable("Vente",2016);
+        assertThat(pSequenceEcritureComptable.getDerniereValeur()).isEqualTo("41");
         assertThat(pEcritureComptable.getReference()).isEqualTo("VE-2016/00002");
 
         manager.addReference(pEcritureComptable);
-        assertThat(pEcritureComptable.getReference()).isEqualTo("VE-2016/00001");
+        assertThat(pEcritureComptable.getReference()).isEqualTo("VE-2016/00042");
 
     }
 
