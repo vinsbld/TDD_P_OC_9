@@ -28,4 +28,15 @@ public class JournalComptableTest {
     public void getByCode_whenJournalComptableNotExist(){
         assertThat(JournalComptable.getByCode(journalComptables, "AS")).isEqualTo(null);
     }
+
+    @Test
+    public void testSetJournalComptable(){
+        JournalComptable pJournalComptable = new JournalComptable();
+        pJournalComptable.setCode("AC");
+        pJournalComptable.setLibelle("Achat");
+        assertThat(pJournalComptable.getCode()).isEqualTo("AC");
+        assertThat(pJournalComptable.getCode()).isNotEqualTo("BC");
+        assertThat(pJournalComptable.getLibelle()).isEqualTo("Achat");
+        assertThat(pJournalComptable.getLibelle()).isNotEqualTo("Other");
+    }
 }

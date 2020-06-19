@@ -32,4 +32,13 @@ public class CompteComptableTest {
         assertThat(CompteComptable.getByNumero(compteComptableList, 12)).isEqualTo(null);
 
     }
+
+    @Test
+    public void testSetCompteComptable(){
+        CompteComptable compteComptable = new CompteComptable();
+        compteComptable.setNumero(12345);
+        compteComptable.setLibelle("compte test");
+        assertThat(compteComptable.getLibelle()).isEqualTo("compte test");
+        assertThat(compteComptable.getNumero()).isEqualTo(12345);
+    }
 }

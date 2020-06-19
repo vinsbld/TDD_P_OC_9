@@ -84,7 +84,7 @@ public class ComptabiliteManagerImplTest {
     }
 
     @Test(expected = FunctionalException.class)
-    public void checkEcritureComptableUnitRG3() throws Exception {
+    public void checkEcritureComptableUnit_RG3_DeuxLignesDebit() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
@@ -97,6 +97,40 @@ public class ComptabiliteManagerImplTest {
                 null, new BigDecimal(123),
                 null));
         manager.checkEcritureComptableUnit(vEcritureComptable);
+
+    }
+
+    @Test(expected = FunctionalException.class)
+    public void checkEcritureComptableUnit_RG3_UneSeulLigneEcriture() throws Exception{
+        EcritureComptable vEcritureComptable;
+        vEcritureComptable = new EcritureComptable();
+        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        vEcritureComptable.setDate(new Date());
+        vEcritureComptable.setLibelle("Libelle");
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, null,
+                null));
+
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
+        vEcritureComptable.getListLigneEcriture().clear();
+        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        vEcritureComptable.setDate(new Date());
+        vEcritureComptable.setLibelle("Libelle");
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, null,
+                new BigDecimal(123)));
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
+        vEcritureComptable.getListLigneEcriture().clear();
+        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        vEcritureComptable.setDate(new Date());
+        vEcritureComptable.setLibelle("Libelle");
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+
     }
 
     @Test

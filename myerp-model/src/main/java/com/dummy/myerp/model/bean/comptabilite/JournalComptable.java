@@ -1,6 +1,5 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;

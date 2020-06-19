@@ -250,8 +250,8 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     }
 
     @Override
-    public SequenceEcritureComptable getSequenceEcritureComptable(String pJournal, Integer pAnnee) {
-        return null;
+    public SequenceEcritureComptable getSequenceEcritureComptable(String pJournal, Integer pAnnee) { return
+        null;
     }
 
     @Override

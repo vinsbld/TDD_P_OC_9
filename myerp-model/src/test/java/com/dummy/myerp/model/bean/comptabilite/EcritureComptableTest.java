@@ -1,6 +1,7 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Assert;
@@ -49,7 +50,6 @@ public class EcritureComptableTest {
             vEcriture.getListLigneEcriture().add(this.createLigne(1, "20", "1"));
             vEcriture.getListLigneEcriture().add(this.createLigne(1, null, "30"));
             vEcriture.getListLigneEcriture().add(this.createLigne(1, "1", "2"));
-
             assertThat(vEcriture.isEquilibree()).isEqualTo(false);
         }
 
@@ -74,6 +74,24 @@ public class EcritureComptableTest {
             vEcriture.getListLigneEcriture().add(createLigne(1,"40","89.8"));
 
             Assert.assertEquals(vEcriture.getTotalCredit(), BigDecimal.valueOf(30+(-29.00)+89.8).setScale(2, BigDecimal.ROUND_HALF_UP));
+        }
+
+        @Test
+        public void testGetSetEcritureComptable(){
+            EcritureComptable pEcritureComptable = new EcritureComptable();
+            Date date = new Date();
+            pEcritureComptable.setReference("AC");
+            pEcritureComptable.setLibelle("Achat");
+            pEcritureComptable.setId(2);
+            pEcritureComptable.setDate(new Date());
+            assertThat(pEcritureComptable.getReference()).isNotEqualTo("RC");
+            assertThat(pEcritureComptable.getReference()).isEqualTo("AC");
+            assertThat(pEcritureComptable.getLibelle()).isNotEqualTo("Other");
+            assertThat(pEcritureComptable.getLibelle()).isEqualTo("Achat");
+            assertThat(pEcritureComptable.getDate()).isEqualTo(date);
+            assertThat(pEcritureComptable.getId()).isNotEqualTo(1);
+            assertThat(pEcritureComptable.getId()).isEqualTo(2);
+
         }
 
 
