@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LigneEcritureComptableTest {
 
     @Test
-    public void testSetGetLigneEcritureComptable(){
+    public void test_SetGet_LigneEcritureComptable(){
         LigneEcritureComptable vLigneEcritureComptable = new LigneEcritureComptable();
         CompteComptable vCompteComptable = new CompteComptable();
 
@@ -33,7 +33,9 @@ public class LigneEcritureComptableTest {
     public void test_toString_line(){
         LigneEcritureComptable vLigneEcritureComptable = new LigneEcritureComptable(new CompteComptable(2,"test compte"),"test ligne",new BigDecimal("123"), new BigDecimal("123"));
 
-        String testToString = "LigneEcritureComptable{compteComptable="+vLigneEcritureComptable.getCompteComptable()+", libelle='"+vLigneEcritureComptable.getLibelle()+"', "+"debit="+vLigneEcritureComptable.getDebit()+", "+"credit="+vLigneEcritureComptable.getCredit()+"}";
+        String testToString = "LigneEcritureComptable{compteComptable="+vLigneEcritureComptable.getCompteComptable()
+                +", libelle='"+vLigneEcritureComptable.getLibelle()+"', "+"debit="+vLigneEcritureComptable.getDebit()
+                +", "+"credit="+vLigneEcritureComptable.getCredit()+"}";
         String resultatTestToString = vLigneEcritureComptable.toString();
         assertThat(testToString).isEqualTo(resultatTestToString);
     }

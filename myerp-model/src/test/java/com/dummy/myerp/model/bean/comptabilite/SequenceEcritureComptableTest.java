@@ -34,4 +34,14 @@ public class SequenceEcritureComptableTest {
         assertThat(pSequenceEcritureComptable.getDerniereValeur()).isNotEqualTo(90);
         assertThat(pSequenceEcritureComptable.getDerniereValeur()).isEqualTo(24);
     }
+
+    @Test
+    public void test_toString_Sequence(){
+        SequenceEcritureComptable vSequenceEcritureComptable = new SequenceEcritureComptable(2020, 24, vJournalComptable);
+        String testToString = "SequenceEcritureComptable{annee="+vSequenceEcritureComptable.getAnnee()
+                +", "+"derniereValeur="+vSequenceEcritureComptable.getDerniereValeur()
+                +", "+"journal comptable="+vSequenceEcritureComptable.getJournalComptable()+"}";
+        String resultatTestToString = vSequenceEcritureComptable.toString();
+        assertThat(testToString).isEqualTo(resultatTestToString);
+    }
 }

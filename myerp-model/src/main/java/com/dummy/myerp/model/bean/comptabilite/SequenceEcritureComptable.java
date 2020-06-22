@@ -57,6 +57,7 @@ public class SequenceEcritureComptable {
         vStB.append("{")
             .append("annee=").append(annee)
             .append(vSEP).append("derniereValeur=").append(derniereValeur)
+                .append(vSEP).append("journal comptable=").append(journalComptable)
             .append("}");
         return vStB.toString();
     }
