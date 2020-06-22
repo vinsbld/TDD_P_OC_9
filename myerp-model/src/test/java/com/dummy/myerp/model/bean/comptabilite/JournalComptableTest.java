@@ -39,4 +39,12 @@ public class JournalComptableTest {
         assertThat(pJournalComptable.getLibelle()).isEqualTo("Achat");
         assertThat(pJournalComptable.getLibelle()).isNotEqualTo("Other");
     }
+    @Test
+    public void test_toString_JournalComptable(){
+        JournalComptable vJournalComptable = new JournalComptable("AC","test Compte Comptable");
+        String toStringTest = "JournalComptable{code='"+vJournalComptable.getCode()
+                +"', "+"libelle='"+vJournalComptable.getLibelle()+"'}";
+        String resultatTestToString = vJournalComptable.toString();
+        assertThat(toStringTest).isEqualTo(resultatTestToString);
+    }
 }

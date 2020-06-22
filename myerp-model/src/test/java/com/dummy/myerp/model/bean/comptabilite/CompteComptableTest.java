@@ -34,7 +34,7 @@ public class CompteComptableTest {
     }
 
     @Test
-    public void testSetCompteComptable(){
+    public void test_GetSet_CompteComptable(){
         CompteComptable compteComptable = new CompteComptable();
         compteComptable.setNumero(12345);
         compteComptable.setLibelle("compte test");
