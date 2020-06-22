@@ -248,10 +248,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
 
 
 
-    @Override
-    public void updateSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable) {
 
-    }
 
     @Override
     public void insertSequenceEcritureComptable(SequenceEcritureComptable sequenceEcritureComptable) {
@@ -274,7 +271,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
         vJdbcTemplate.update(SQLdeleteListLigneEcritureComptable, vSqlParams);
     }
 
-    // ==================== SequenceEcritureComptable
+    // ==================== SequenceEcritureComptable - GET ====================
     private String SQLgetSequenceEcritureComptable;
     public void setSQLgetSequenceEcritureComptable(String vSQLgetSequenceEcritureComptable) {
         SQLgetSequenceEcritureComptable = vSQLgetSequenceEcritureComptable;
@@ -295,4 +292,24 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
         }
         return vBean;
     }
+
+    // ==================== SequenceEcritureComptable - UPDATE ====================
+
+    private String SQLupdateSequenceEcritureComptable;
+    public void setSQLupdateSequenceEcritureComptable(String vSQLupdateSequenceEcritureComptable) {
+        SQLupdateSequenceEcritureComptable = vSQLupdateSequenceEcritureComptable;
+    }
+
+    @Override
+    public void updateSequenceEcritureComptable(SequenceEcritureComptable vSequenceEcritureComptable) {
+        NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource(DataSourcesEnum.MYERP));
+        MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
+        vSqlParams.addValue("journal_code", vSequenceEcritureComptable.getJournalComptable());
+        vSqlParams.addValue("annee", vSequenceEcritureComptable.getAnnee());
+        vSqlParams.addValue("derniere_valeur", vSequenceEcritureComptable.getDerniereValeur());
+        vJdbcTemplate.update(SQLupdateSequenceEcritureComptable, vSqlParams);
+
+    }
+
+
 }
