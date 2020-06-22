@@ -92,18 +92,15 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
        manager = new ComptabiliteManagerImpl();
        EcritureComptable fEcritureComptable = manager.getListEcritureComptable().get(4);
        fEcritureComptable.setJournal(new JournalComptable("BQ","2016"));
-       fEcritureComptable.setReference("BQ-2016/00003");
+       fEcritureComptable.setReference("VE-2016/00004");
        manager.checkEcritureComptable(fEcritureComptable);
     }
 
-    /*@Test
+    @Test
     public void test6_AddReference_WhenRefExist(){
-        manager = new ComptabiliteManagerImpl();
-        EcritureComptable pEcritureComptable = manager.getListEcritureComptable().get(0);
-        assertThat(pEcritureComptable.getReference()).isEqualTo("AC-2016/00001");
+    manager = new ComptabiliteManagerImpl();
+    EcritureComptable pEcritureComptable = manager.getListEcritureComptable().get(0);
 
-        manager.addReference(pEcritureComptable);
-
-    }*/
+    }
 
 }

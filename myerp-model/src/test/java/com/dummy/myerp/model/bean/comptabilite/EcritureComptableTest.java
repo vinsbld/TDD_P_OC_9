@@ -79,11 +79,14 @@ public class EcritureComptableTest {
         @Test
         public void testGetSetEcritureComptable(){
             EcritureComptable pEcritureComptable = new EcritureComptable();
-            Date date = new Date();
+            JournalComptable journalComptable = new JournalComptable();
             pEcritureComptable.setReference("AC");
             pEcritureComptable.setLibelle("Achat");
             pEcritureComptable.setId(2);
+            Date date = new Date();
             pEcritureComptable.setDate(new Date());
+            pEcritureComptable.setJournal(journalComptable);
+            assertThat(pEcritureComptable.getJournal()).isEqualTo(journalComptable);
             assertThat(pEcritureComptable.getReference()).isNotEqualTo("RC");
             assertThat(pEcritureComptable.getReference()).isEqualTo("AC");
             assertThat(pEcritureComptable.getLibelle()).isNotEqualTo("Other");
