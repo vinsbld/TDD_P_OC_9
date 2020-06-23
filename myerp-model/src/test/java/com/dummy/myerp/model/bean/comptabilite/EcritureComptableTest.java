@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -77,7 +78,7 @@ public class EcritureComptableTest {
         }
 
         @Test
-        public void testGetSetEcritureComptable(){
+        public void test_GetSet_EcritureComptable(){
             EcritureComptable pEcritureComptable = new EcritureComptable();
             JournalComptable journalComptable = new JournalComptable();
             pEcritureComptable.setReference("AC");
@@ -94,6 +95,25 @@ public class EcritureComptableTest {
             assertThat(pEcritureComptable.getDate()).isEqualTo(date);
             assertThat(pEcritureComptable.getId()).isNotEqualTo(1);
             assertThat(pEcritureComptable.getId()).isEqualTo(2);
+
+        }
+
+
+        @Test
+        public void test_toString_EcritureComptable(){
+            JournalComptable vJournalComptable = new JournalComptable();
+            Date date = new Date();
+            EcritureComptable vEcritureComptable = new EcritureComptable(4, vJournalComptable, "AC-2020/00001", date, "test toString");
+            String testToString = "EcritureComptable{id="+vEcritureComptable.getId()
+                    +", "+"journal="+vEcritureComptable.getJournal()
+                    +", "+"reference='"+vEcritureComptable.getReference()+"', "
+                    +"date="+vEcritureComptable.getDate()
+                    +", "+"libelle='"+vEcritureComptable.getLibelle()
+                    +"', "+"totalDebit="+vEcritureComptable.getTotalDebit()
+                    +", "+"totalCredit="+vEcritureComptable.getTotalCredit()+", "
+                    +"listLigneEcriture=[\n"+ StringUtils.join(vEcritureComptable.getListLigneEcriture(),"\n")+"\n]}";
+            String resultatTestToString = vEcritureComptable.toString();
+            assertThat(testToString).isEqualTo(resultatTestToString);
 
         }
 

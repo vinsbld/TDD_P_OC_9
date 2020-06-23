@@ -101,6 +101,8 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
     manager = new ComptabiliteManagerImpl();
     EcritureComptable pEcritureComptable = manager.getListEcritureComptable().get(0);
 
+    manager.addReference(pEcritureComptable);
+
     }
 
 }

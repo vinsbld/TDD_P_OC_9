@@ -304,7 +304,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     public void updateSequenceEcritureComptable(SequenceEcritureComptable vSequenceEcritureComptable) {
         NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource(DataSourcesEnum.MYERP));
         MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
-        vSqlParams.addValue("journal_code", vSequenceEcritureComptable.getJournalComptable());
+        vSqlParams.addValue("journal_code", vSequenceEcritureComptable.getJournalComptable().getCode());
         vSqlParams.addValue("annee", vSequenceEcritureComptable.getAnnee());
         vSqlParams.addValue("derniere_valeur", vSequenceEcritureComptable.getDerniereValeur());
         vJdbcTemplate.update(SQLupdateSequenceEcritureComptable, vSqlParams);
