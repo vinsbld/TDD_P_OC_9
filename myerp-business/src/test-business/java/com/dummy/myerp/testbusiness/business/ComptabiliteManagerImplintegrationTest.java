@@ -1,7 +1,9 @@
 package com.dummy.myerp.testbusiness.business;
 
+
 import com.dummy.myerp.business.impl.manager.ComptabiliteManagerImpl;
 import com.dummy.myerp.model.bean.comptabilite.*;
+
 
 import com.dummy.myerp.technical.exception.FunctionalException;
 import org.junit.FixMethodOrder;
@@ -86,23 +88,34 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
         assertThat(vEcritureComptable.getReference()).isEqualTo("BQ-2020/00001");
     }
 
+    @Test
+    public void test5_AddReference_WhenRefExist_update(){
+        manager = new ComptabiliteManagerImpl();
+        EcritureComptable pEcritureComptable = manager.getListEcritureComptable().get(0);
+        manager.addReference(pEcritureComptable);
+
+    }
 
     @Test(expected = FunctionalException.class)
-    public void test5_checkEcritureComptable_RG_6() throws FunctionalException {
+    public void test6_checkEcritureComptable_RG_6() throws FunctionalException {
        manager = new ComptabiliteManagerImpl();
-       EcritureComptable fEcritureComptable = manager.getListEcritureComptable().get(4);
-       fEcritureComptable.setJournal(new JournalComptable("BQ","2016"));
-       fEcritureComptable.setReference("VE-2016/00004");
-       manager.checkEcritureComptable(fEcritureComptable);
-    }
+       vEcritureComptable = new EcritureComptable();
+       vEcritureComptable = manager.getListEcritureComptable().get(0);
+       vEcritureComptable.getJournal().setCode(manager.getListEcritureComptable().get(1).getJournal().getCode());
+       vEcritureComptable.setReference(manager.getListEcritureComptable().get(1).getReference());
+       manager.checkEcritureComptable(vEcritureComptable);
 
-    @Test
-    public void test6_AddReference_WhenRefExist(){
-    manager = new ComptabiliteManagerImpl();
-    EcritureComptable pEcritureComptable = manager.getListEcritureComptable().get(0);
-
-    manager.addReference(pEcritureComptable);
 
     }
+
+    @Test(expected = FunctionalException.class)
+    public void test7_checkEcritureComptable_RG_6_When_Ref_Exist() throws FunctionalException{
+        manager = new ComptabiliteManagerImpl();
+        EcritureComptable vEcritureComptable = manager.getListEcritureComptable().get(0);
+        vEcritureComptable.setReference("VE-2016/00004");
+        manager.checkEcritureComptable(vEcritureComptable);
+
+    }
+
 
 }
