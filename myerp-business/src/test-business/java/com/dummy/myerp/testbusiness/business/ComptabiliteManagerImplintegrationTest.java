@@ -6,6 +6,7 @@ import com.dummy.myerp.model.bean.comptabilite.*;
 
 
 import com.dummy.myerp.technical.exception.FunctionalException;
+import com.dummy.myerp.technical.exception.NotFoundException;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +59,7 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
         EcritureComptable ecritureComptable = manager.getListEcritureComptable().get(0);
         ecritureComptable.setLibelle("Update_Test");
         manager.updateEcritureComptable(ecritureComptable);
-        assertThat(ecritureComptable.getLibelle()).isEqualTo("Update_Test");
+        assertThat(manager.getListEcritureComptable().get(0).getLibelle()).isEqualTo("Update_Test");
 
 
     }
@@ -109,12 +110,14 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
     }
 
     @Test(expected = FunctionalException.class)
-    public void test7_checkEcritureComptable_RG_6_When_Ref_Exist() throws FunctionalException{
+    public void test7_checkEcritureComptable_RG_6_When_Ref_Exist() throws FunctionalException, NotFoundException {
         manager = new ComptabiliteManagerImpl();
+        vEcritureComptable = new EcritureComptable();
         EcritureComptable vEcritureComptable = manager.getListEcritureComptable().get(0);
         vEcritureComptable.setReference("VE-2016/00004");
         manager.checkEcritureComptable(vEcritureComptable);
-
+        vEcritureComptable.setReference("VE-2016/00005");
+        manager.checkEcritureComptable(vEcritureComptable);
     }
 
 
