@@ -59,6 +59,7 @@
         <sonar.organization>vinsbld</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.login>9b219a16e1d9843135e35be4f326830b80756bea</sonar.login>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
 
     </properties>
 
@@ -266,6 +267,13 @@
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- ===== Sonar ===== -->
+            <dependency>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.7.0.1746</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -393,17 +401,32 @@
                     <version>0.8.5</version>
                     <executions>
                         <execution>
-                            <id>jacoco-initialize</id>
+                            <id>default-prepare-agent</id>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
                         </execution>
                         <execution>
-                            <id>jacoco-site</id>
-                            <phase>package</phase>
+                            <id>default-report</id>
                             <goals>
                                 <goal>report</goal>
                             </goals>
+                        </execution>
+                        <execution>
+                            <id>merge</id>
+                            <goals>
+                                <goal>merge</goal>
+                            </goals>
+                            <configuration>
+                                <fileSets>
+                                    <fileSet implementation="org.apache.maven.shared.model.fileset.FileSet">
+                                        <directory>${project.basedir}</directory>
+                                        <includes>
+                                            <include>**/*.exec</include>
+                                        </includes>
+                                    </fileSet>
+                                </fileSets>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
