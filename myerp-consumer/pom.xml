@@ -36,12 +36,18 @@
     <!-- Properties -->
     <!-- =============================================================== -->
     <properties>
-        <sonar.projectKey>vinsbld_TDD_P_OC_9.consumer</sonar.projectKey>
+        <dep.junit.version>5.5.1</dep.junit.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+
+
+        <sonar.projectKey>vinsbld_TDD_P_OC_9.myerp-consumer</sonar.projectKey>
         <sonar.organization>vinsbld</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.login>092313f723f886553cfac8385ab52addf50037a3</sonar.login>
     </properties>
-
 
     <!-- =============================================================== -->
     <!-- Dependencies -->
@@ -52,6 +58,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>myerp-model</artifactId>
         </dependency>
+
 
         <!-- spring-jdbc : commons-exceptions, datasource management -->
         <dependency>
@@ -133,7 +140,6 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
                 <executions>
                     <execution>
                         <goals>
@@ -144,7 +150,7 @@
                         <id>report</id>
                         <phase>test</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>

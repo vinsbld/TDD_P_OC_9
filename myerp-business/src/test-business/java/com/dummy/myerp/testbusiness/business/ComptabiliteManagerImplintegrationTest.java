@@ -6,7 +6,6 @@ import com.dummy.myerp.model.bean.comptabilite.*;
 
 
 import com.dummy.myerp.technical.exception.FunctionalException;
-import com.dummy.myerp.technical.exception.NotFoundException;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +39,7 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
        journalComptable = new JournalComptable("AC", "Achat");
        vEcritureComptable.setJournal(journalComptable);
        vEcritureComptable.setDate(new Date());
-       vEcritureComptable.setReference("AC-2020/00001");
+       vEcritureComptable.setReference("AC-2020/00024");
        vEcritureComptable.setLibelle("Test_Insert");
        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(401),null, new BigDecimal(123),null));
        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(411),null, null,new BigDecimal(123)));
@@ -48,7 +47,7 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
        int tailleDeLalisteAvantInsert = manager.getListEcritureComptable().size();
        manager.insertEcritureComptable(vEcritureComptable);
        assertThat(manager.getListEcritureComptable().size()).isEqualTo(tailleDeLalisteAvantInsert + 1);
-       assertThat(vEcritureComptable.getReference()).isEqualTo("AC-2020/00001");
+       assertThat(vEcritureComptable.getReference()).isEqualTo("AC-2020/00024");
 
     }
 
@@ -57,11 +56,11 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
 
         manager = new ComptabiliteManagerImpl();
         EcritureComptable ecritureComptable = manager.getListEcritureComptable().get(0);
+        assertThat(ecritureComptable.getId()).isEqualTo(-1);
         ecritureComptable.setLibelle("Update_Test");
         manager.updateEcritureComptable(ecritureComptable);
-        assertThat(manager.getListEcritureComptable().get(0).getLibelle()).isEqualTo("Update_Test");
-
-
+        assertThat(ecritureComptable.getLibelle()).isEqualTo("Update_Test");
+        
     }
 
     @Test
@@ -110,7 +109,7 @@ public class ComptabiliteManagerImplintegrationTest extends BusinessTestCase{
     }
 
     @Test(expected = FunctionalException.class)
-    public void test7_checkEcritureComptable_RG_6_When_Ref_Exist() throws FunctionalException, NotFoundException {
+    public void test7_checkEcritureComptable_RG_6_When_Ref_Exist() throws FunctionalException {
         manager = new ComptabiliteManagerImpl();
         vEcritureComptable = new EcritureComptable();
         EcritureComptable vEcritureComptable = manager.getListEcritureComptable().get(0);
