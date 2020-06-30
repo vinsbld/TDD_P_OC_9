@@ -42,6 +42,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <sonar.projectKey>vinsbld_TDD_P_OC_9_1.model</sonar.projectKey>
+        <sonar.coverage.jacoco.xlmReportPaths>${project.basedir}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xlmReportPaths>
     </properties>
 
 
