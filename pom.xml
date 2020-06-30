@@ -59,7 +59,7 @@
         <sonar.organization>vinsbld</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.login>9b219a16e1d9843135e35be4f326830b80756bea</sonar.login>
-        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/../target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
 
