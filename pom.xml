@@ -55,7 +55,8 @@
         <spring.version>4.3.7.RELEASE</spring.version>
 
         <!-- ===== SonarCloud ===== -->
-
+        <sonar.version>3.7.0.1746</sonar.version>
+        <aggregate.report.dir>tests/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 
 
     </properties>
@@ -265,12 +266,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- ===== Sonar ===== -->
-            <dependency>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.7.0.1746</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -396,26 +391,11 @@
                     <version>2.10.4</version>
                 </plugin>
 
-                <!-- ===== Jacoco ===== -->
+                <!-- ===== Jacoco Sonar===== -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.5</version>
-                    <executions>
-                        <execution>
-                            <id>default-prepare-agent</id>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report-aggregate</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>report-aggregate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
 
                 <!-- ===== Aide au constructions particulières ===== -->
@@ -468,7 +448,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M3</version>
 
                 <configuration>
                     <linkXRef>false</linkXRef>
