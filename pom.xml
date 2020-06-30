@@ -408,7 +408,7 @@
                         <execution>
                             <id>default-report</id>
                             <goals>
-                                <goal>report-aggregate</goal>
+                                <goal>report</goal>
                             </goals>
                         </execution>
                     </executions>
