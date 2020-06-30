@@ -43,7 +43,6 @@
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
 
-        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <!-- =============================================================== -->
@@ -144,8 +143,8 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>test</phase>
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report-aggregate</goal>
                         </goals>

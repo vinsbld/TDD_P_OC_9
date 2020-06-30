@@ -55,11 +55,9 @@
         <spring.version>4.3.7.RELEASE</spring.version>
 
         <!-- ===== SonarCloud ===== -->
-        <sonar.projectKey>vinsbld_TDD_P_OC_9_1</sonar.projectKey>
-        <sonar.organization>vinsbld</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.login>9b219a16e1d9843135e35be4f326830b80756bea</sonar.login>
-        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+
+
+
     </properties>
 
 
@@ -411,7 +409,8 @@
                             </goals>
                         </execution>
                         <execution>
-                            <id>default-report</id>
+                            <id>report-aggregate</id>
+                            <phase>verify</phase>
                             <goals>
                                 <goal>report-aggregate</goal>
                             </goals>
