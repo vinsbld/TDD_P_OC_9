@@ -58,6 +58,9 @@
         <sonar.version>3.7.0.1746</sonar.version>
         <aggregate.report.dir>tests/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 
+        <dep.junit.version>5.4.2</dep.junit.version>
+
+
 
     </properties>
 
@@ -262,7 +265,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>4.11</version>
                 <scope>test</scope>
             </dependency>
 
