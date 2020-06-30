@@ -43,10 +43,9 @@
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
 
-        <sonar.projectKey>vinsbld_TDD_P_OC_9.myerp-consumer</sonar.projectKey>
         <sonar.organization>vinsbld</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.login>092313f723f886553cfac8385ab52addf50037a3</sonar.login>
+        <sonar.login>4c5aafd8dff579e6ccb61c4e3ac0b03dcc7923be</sonar.login>
     </properties>
 
     <!-- =============================================================== -->
