@@ -28,7 +28,7 @@
         <site>
             <id>site</id>
             <name>site-doc</name>
-            <url>file://${basedir}/target/site-doc/${project.artifactId}/</url>
+            <url>file://${basedir}/../target/site-doc/${project.artifactId}/</url>
         </site>
     </distributionManagement>
 
@@ -44,7 +44,7 @@
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 
         <sonar.projectKey>vinsbld_TDD_P_OC_9_1.technical</sonar.projectKey>
-        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/../target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
     </properties>
 
@@ -145,7 +145,7 @@
                         <id>report</id>
                         <phase>test</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
