@@ -37,7 +37,8 @@
     <!-- Properties -->
     <!-- =============================================================== -->
     <properties>
-        <dep.junit.version>5.4.2</dep.junit.version>
+        <dep.junit.version>5.5.1</dep.junit.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 
@@ -94,9 +95,9 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>prepare-package</phase>
+                        <phase>test</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>

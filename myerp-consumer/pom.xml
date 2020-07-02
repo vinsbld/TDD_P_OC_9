@@ -36,7 +36,8 @@
     <!-- Properties -->
     <!-- =============================================================== -->
     <properties>
-        <dep.junit.version>5.4.2</dep.junit.version>
+        <dep.junit.version>5.5.1</dep.junit.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <!-- =============================================================== -->
@@ -89,34 +90,25 @@
             <id>test-consumer</id>
             <build>
                 <plugins>
-                    <!-- Ajout du répertoire src/test-consumer/java en tant que source de test du module -->
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>add-test-source</id>
-                                <phase>generate-test-sources</phase>
                                 <goals>
-                                    <goal>add-test-source</goal>
+                                    <goal>prepare-agent</goal>
                                 </goals>
-                                <configuration>
-                                    <sources>
-                                        <source>src/test-consumer/java</source>
-                                    </sources>
-                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>report-aggregate</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report-aggregate</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
-                <testResources>
-                    <testResource>
-                        <directory>src/test/resources</directory>
-                    </testResource>
-                    <testResource>
-                        <directory>src/test-consumer/resources</directory>
-                    </testResource>
-                </testResources>
             </build>
         </profile>
     </profiles>
@@ -137,7 +129,7 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report-aggregate</id>
+                        <id>report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>report-aggregate</goal>
