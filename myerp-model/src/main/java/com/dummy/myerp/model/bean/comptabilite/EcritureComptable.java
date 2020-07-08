@@ -102,7 +102,6 @@ public class EcritureComptable {
             }
         }
         return vRetour.setScale(2,RoundingMode.HALF_UP);
-        //.setScale(2,RoundingMode.HALF_UP)
     }
 
     /**
@@ -118,7 +117,6 @@ public class EcritureComptable {
             }
         }
         return vRetour.setScale(2, RoundingMode.HALF_UP);
-        //.setScale(2, RoundingMode.HALF_UP)
     }
 
     /**
