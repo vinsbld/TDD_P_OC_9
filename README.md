@@ -7,7 +7,7 @@ Le profil de test est :
 
     test-business
 
-Organisation du répertoire
+# Organisation du répertoire
 
 doc : documentation
 
@@ -17,7 +17,7 @@ doc : documentation
 
     src : code source de l'application
 
-Environnement de développement
+# Environnement de développement
 
 Les composants nécessaires lors du développement sont disponibles via des conteneurs docker. L'environnement de développement est assemblé grâce à docker-compose (cf docker/dev/docker-compose.yml).
 
@@ -25,17 +25,19 @@ Il comporte :
 
     une base de données PostgreSQL contenant un jeu de données de démo (postgresql://127.0.0.1:9032/db_myerp)
 
-Lancement
+# Lancement
 
 cd docker/dev
 
 docker-compose up
-Arrêt
+
+# Arrêt
 
 cd docker/dev
 
 docker-compose stop
-Remise à zero
+
+# Remise à zero
 
 cd docker/dev
 
