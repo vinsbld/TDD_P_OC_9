@@ -170,7 +170,7 @@ public class ComptabiliteManagerImplTest {
     }
 
     @Test(expected = FunctionalException.class)
-    public void checkEcritureComptableUnitRG5() throws Exception{
+    public void checkEcritureComptableUnitRG5_Annee() throws Exception{
         vEcritureComptable.setJournal( journalComptable );
         vEcritureComptable.setReference("AC-2020/00001");
         vEcritureComptable.setDate( new Date() );
@@ -188,7 +188,7 @@ public class ComptabiliteManagerImplTest {
     }
 
     @Test(expected = FunctionalException.class)
-    public void checkEcritureComptableUnitRG5_2() throws Exception{
+    public void checkEcritureComptableUnitRG5_Ref() throws Exception{
         vEcritureComptable.setJournal( journalComptable );
         vEcritureComptable.setReference("AC-2020/00001");
         vEcritureComptable.setDate( new Date() );
